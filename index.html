@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Fiction - Big 3 Anime Community</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7C9885;
+            --secondary: #B8A398;
+            --accent: #6B8E9F;
+            --text-dark: #2C2C2C;
+            --text-light: #5A5A5A;
+            --bg-light: #F7F5F2;
+            --bg-white: #FFFFFF;
+            --border: #E0DDD8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(to bottom, var(--bg-white) 0%, var(--bg-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124, 152, 133, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-gentle 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(107, 142, 159, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-gentle 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float-gentle {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(-30px, -30px);
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+
+        .social-btn {
+            padding: 0.9rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border: 1.5px solid;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+        }
+
+        .btn-youtube {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-youtube:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-discord {
+            border-color: var(--accent);
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-discord::before {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .btn-discord:hover {
+            background: var(--accent);
+            color: white;
+            padding-left: 2.5rem;
+        }
+
+        .btn-discord:hover::before {
+            left: 0.8rem;
+            opacity: 1;
+        }
+
+        .btn-twitter {
+            border-color: var(--text-dark);
+            color: var(--text-dark);
+        }
+
+        .btn-twitter:hover {
+            background: var(--text-dark);
+            color: white;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 6rem 2rem;
+            background: var(--bg-white);
+        }
+
+        .section-header {
+            max-width: 1200px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            color: var(--text-dark);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .content-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .content-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--primary);
+            transition: height 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .content-card:hover::before {
+            height: 100%;
+        }
+
+        .card-number {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            color: var(--border);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .card-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .card-link:hover {
+            gap: 1rem;
+        }
+
+        .card-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 16/9;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 0.05;
+        }
+
+        .gallery-placeholder {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 6rem 2rem;
+            background: var(--primary);
+            color: white;
+        }
+
+        .newsletter-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .newsletter-description {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border: 1px solid white;
+            background: white;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .newsletter-btn:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--bg-white);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        .about-text p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social-link {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            color: white;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.5;
+            margin-top: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input,
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Golden Fiction</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Welcome to Golden Fiction</div>
+            <h1 class="hero-title">Where the Big 3 legends never fade</h1>
+            <p class="hero-subtitle">
+                A community built by fans, for fans. Dive deep into Naruto, One Piece, and Bleach with thoughtful discussions, 
+                latest manga chapters, powerscaling debates, and theories about what's coming next. Let's explore these legendary stories together.
+            </p>
+            <div class="social-links">
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="social-btn btn-youtube">YouTube</a>
+                <a href="https://discord.gg/bEnHa2jr5j" target="_blank" class="social-btn btn-discord">Discord</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section id="content" class="content-section">
+        <div class="section-header">
+            <div class="section-label">What We Create</div>
+            <h2 class="section-title">Content & Community</h2>
+            <p class="section-description">
+                From character analyses to episode breakdowns, we create content that celebrates 
+                the depth and artistry of anime storytelling.
+            </p>
+        </div>
+        <div class="content-grid">
+            <div class="content-card">
+                <div class="card-number">01</div>
+                <h3 class="card-title">Latest Manga Chapters</h3>
+                <p class="card-description">
+                    Breaking down the newest chapters from One Piece and other ongoing series. 
+                    Raw reactions, panel analysis, and what it all means for the story ahead.
+                </p>
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="card-link">Watch breakdowns</a>
+            </div>
+
+            <div class="content-card">
+                <div class="card-number">02</div>
+                <h3 class="card-title">Powerscaling Debates</h3>
+                <p class="card-description">
+                    Who wins? Madara vs Aizen? Naruto vs Luffy? We dive into abilities, feats, and scaling 
+                    to settle the debates that keep the fandom alive.
+                </p>
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="card-link">Join debates</a>
+            </div>
+
+            <div class="content-card">
+                <div class="card-number">03</div>
+                <h3 class="card-title">Theory Crafting</h3>
+                <p class="card-description">
+                    What happens next? Predictions, theories, and speculation about future arcs, 
+                    character developments, and plot twists we can't wait to see.
+                </p>
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="card-link">Explore theories</a>
+            </div>
+
+            <div class="content-card">
+                <div class="card-number">04</div>
+                <h3 class="card-title">Character Deep Dives</h3>
+                <p class="card-description">
+                    Understanding what makes these characters iconic. Their journeys, growth, 
+                    philosophies, and the moments that defined them.
+                </p>
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="card-link">Read analyses</a>
+            </div>
+
+            <div class="content-card">
+                <div class="card-number">05</div>
+                <h3 class="card-title">Community Discussions</h3>
+                <p class="card-description">
+                    Active Discord community where we talk about everything anime. 
+                    Watch parties, hot takes, memes, and genuine conversations with fellow fans.
+                </p>
+                <a href="https://discord.gg/bEnHa2jr5j" target="_blank" class="card-link">Join Discord</a>
+            </div>
+
+            <div class="content-card">
+                <div class="card-number">06</div>
+                <h3 class="card-title">Episode Reviews</h3>
+                <p class="card-description">
+                    Thoughtful reviews of anime episodes, focusing on animation quality, 
+                    pacing, adaptation choices, and how they bring the manga to life.
+                </p>
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="card-link">Watch reviews</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="section-header">
+            <div class="section-label">Recent Work</div>
+            <h2 class="section-title">Content Gallery</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-placeholder">Latest Video</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">Character Analysis</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">Episode Review</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">Community Highlight</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">Thematic Essay</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">Discussion Thread</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Golden Fiction</h2>
+                <p>
+                    Hey, I'm Barou—a student, anime enthusiast, and occasional coder who's been obsessed with 
+                    the Big 3 for as long as I can remember. Naruto, One Piece, and Bleach aren't just shows to me; 
+                    they're stories that shaped how I see friendship, perseverance, and chasing your dreams.
+                </p>
+                <p>
+                    I spend most of my time on Discord discussing the latest manga chapters, debating powerscaling, 
+                    and theorizing about what's coming next. Golden Fiction started because I wanted to create the kind 
+                    of space every anime watcher deserves—a place where you can geek out, share hot takes, and actually 
+                    have meaningful conversations about these legendary stories.
+                </p>
+                <p>
+                    Whether you're here for manga breakdowns, character analyses, or just to connect with people who 
+                    love these series as much as you do, I'm glad you found this corner of the internet. Let's explore 
+                    these worlds together.
+                </p>
+            </div>
+            <div class="about-image">
+                Your Content Preview
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter">
+        <div class="newsletter-content">
+            <h2 class="newsletter-title">Join the Community</h2>
+            <p class="newsletter-description">
+                Subscribe to get notified about new videos, manga chapter breakdowns, and community events. 
+                No spam—just updates for true Big 3 fans.
+            </p>
+            <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleSubscribe(event)">
+                <input type="hidden" name="form-name" value="newsletter" />
+                <p style="display: none;">
+                    <label>Don't fill this out: <input name="bot-field" /></label>
+                </p>
+                <input 
+                    type="email" 
+                    name="email"
+                    class="newsletter-input" 
+                    placeholder="Your email address" 
+                    required
+                >
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+            <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.8;">Updates sent to: officialbig3community@gmail.com</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Golden Fiction</div>
+            <div class="footer-social">
+                <a href="https://www.youtube.com/@big3anime" target="_blank" class="footer-social-link">YouTube</a>
+                <a href="https://discord.gg/bEnHa2jr5j" target="_blank" class="footer-social-link">Discord</a>
+                <a href="mailto:officialbig3community@gmail.com" class="footer-social-link">Email</a>
+            </div>
+            <p class="footer-text">
+                © 2024 Golden Fiction. Built by Barou for the Big 3 community.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form handler for Netlify Forms
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const form = event.target;
+            const email = form.querySelector('input[type="email"]').value;
+            
+            // Submit to Netlify
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            })
+            .then(() => {
+                alert(`🔥 Thanks for subscribing! You'll be the first to know when Discord launches and new content drops.`);
+                form.reset();
+            })
+            .catch((error) => {
+                alert('Oops! Something went wrong. Try again or email us directly at officialbig3community@gmail.com');
+            });
+            
+            return false;
+        }
+
+        // Fade in elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards
+        document.querySelectorAll('.content-card, .gallery-item').forEach((element, index) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(element);
+        });
+
+        // Navbar background on scroll
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.05)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
